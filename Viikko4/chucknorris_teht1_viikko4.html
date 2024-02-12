@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuck Norris Jokes</title>
+</head>
+<style>
+    .chuck{
+        background-color: red;
+    }
+</style>
+<body>
+  <h3>1. Fetch tehtävä - Vitsi API rajapinnasta</h3>
+
+  <div class="show_joke"></div>
+
+  <button class="chuck">Hae vitsi</button>
+
+  <script>
+    async function getData() {
+      try {
+        const response = await fetch('https://api.chucknorris.io/jokes/random');
+        const data = await response.json();
+        document.querySelector('.show_joke').innerText = data.value;
+      } catch (error) {
+        console.error('Virhe:', error);
+      }
+    }
+
+    document.querySelector('.chuck').addEventListener('click', getData);
+  </script>
+</body>
+</html>
