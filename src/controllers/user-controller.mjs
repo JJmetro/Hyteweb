@@ -4,10 +4,8 @@ import {
   listAllUsers,
   selectUserById,
   updateUserById,
-  selectUserByNameAndPassword,
 } from '../models/user-model.mjs';
 
-// TODO: implement route handlers below for users (real data)
 
 const getUsers = async (req, res) => {
   const result = await listAllUsers();
@@ -62,14 +60,4 @@ const deleteUser = async (req, res) => {
   return res.json(result);
 };
 
-// INSECURE LOGIN uses harcoded passwords only
-// returns user object if username & password match
-const postLogin = async (req, res) => {
-  const {username, password} = req.body;
-  const user = await selectUserByNameAndPassword(username, password);
-  if (user.error) {
-    return res.status(user.error).json(user);
-  }
-  return res.json({message: 'logged in successfully', user});
-};
-export {getUsers, getUserById, postUser, putUser, postLogin, deleteUser};
+export {getUsers, getUserById, postUser, putUser, deleteUser};

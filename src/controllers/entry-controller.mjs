@@ -1,35 +1,43 @@
-import { listAllEntries, findEntryById, addEntry, updateEntryById, deleteEntryById } from "../models/entry-model.mjs";
+import {
+  listAllEntries,
+  findEntryById,
+  addEntry,
+  deleteEntryById,
+  updateEntryById,
+} from '../models/entry-model.mjs';
 
 const getEntries = async (req, res) => {
-  try {
-    const result = await listAllEntries();
+  const result = await listAllEntries();
+  // TODO: return only logged in user's own entries
+  // - add listEntriesByUserId(id) to the model
+  // - get user's id from token (req.user.user_id)
+  if (!result.error) {
     res.json(result);
-  } catch (error) {
-    res.status(500).json({ error: 'Server Error' });
+  } else {
+    res.status(500);
+    res.json(result);
   }
 };
 
 const getEntryById = async (req, res) => {
-  try {
-    const entry = await findEntryById(req.params.id);
-    if (entry) {
-      res.json(entry);
-    } else {
-      res.sendStatus(404);
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Server Error' });
+  const entry = await findEntryById(req.params.id);
+  if (entry) {
+    res.json(entry);
+  } else {
+    res.sendStatus(404);
   }
 };
 
 const postEntry = async (req, res) => {
-  const { filename, title, description, user_id } = req.body;
-  if (filename && title && description && user_id) {
-    try {
-      const result = await addEntry({ filename, title, description, user_id });
-      res.status(201).json({ message: 'New entry added.', ...result });
-    } catch (error) {
-      res.status(500).json({ error: 'Server Error' });
+  const {user_id, entry_date, mood, weight, sleep_hours, notes} = req.body;
+  if (entry_date && (weight || mood || sleep_hours || notes) && user_id) {
+    const result = await addEntry(req.body);
+    if (result.entry_id) {
+      res.status(201);
+      res.json({message: 'New entry added.', ...result});
+    } else {
+      res.status(500);
+      res.json(result);
     }
   } else {
     res.sendStatus(400);
@@ -37,22 +45,26 @@ const postEntry = async (req, res) => {
 };
 
 const putEntry = async (req, res) => {
-  const { title, description } = req.body;
-  try {
-    const result = await updateEntryById(req.params.id, { title, description });
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error: 'Server Error' });
+  const entry_id = req.params.id;
+  const {entry_date, mood, weight, sleep_hours, notes} = req.body;
+  // check that all needed fields are included in request
+  if ((entry_date || weight || mood || sleep_hours || notes) && entry_id) {
+    const result = await updateEntryById({entry_id, ...req.body});
+    if (result.error) {
+      return res.status(result.error).json(result);
+    }
+    return res.status(201).json(result);
+  } else {
+    return res.status(400).json({error: 400, message: 'bad request'});
   }
 };
 
 const deleteEntry = async (req, res) => {
-  try {
-    const result = await deleteEntryById(req.params.id);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error: 'Server Error' });
+  const result = await deleteEntryById(req.params.id);
+  if (result.error) {
+    return res.status(result.error).json(result);
   }
+  return res.json(result);
 };
 
-export { getEntries, getEntryById, postEntry, putEntry, deleteEntry };
+export {getEntries, getEntryById, postEntry, putEntry, deleteEntry};
