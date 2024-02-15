@@ -11,6 +11,19 @@ const listAllEntries = async () => {
   }
 };
 
+const listAllEntriesById = async (id) => {
+  try {
+    const sql = 'SELECT * FROM DiaryEntries WHERE user_id=?';
+    const params = [id];
+    const [rows] = await promisePool.query(sql, params);
+    console.log('rows', rows);
+    return rows;
+  } catch (e) {
+    console.error('error', e.message);
+    return { error: e.message };
+  }
+};
+
 const findEntryById = async (id) => {
   try {
     const [rows] = await promisePool.query('SELECT * FROM DiaryEntries WHERE entry_id = ?', [id]);
@@ -67,7 +80,7 @@ const deleteEntryById = async (id) => {
   }
 };
 
-export { listAllEntries, findEntryById, addEntry, updateEntryById, deleteEntryById };
+export { listAllEntries, listAllEntriesById, findEntryById, addEntry, updateEntryById, deleteEntryById };
 
 
 
