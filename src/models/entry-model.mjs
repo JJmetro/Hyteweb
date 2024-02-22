@@ -50,35 +50,44 @@ const addEntry = async (entry) => {
   }
 };
 
-const updateEntryById = async (id, updatedFields) => {
-  const { title, description } = updatedFields;
-  const sql = `UPDATE DiaryEntries SET title = ?, description = ? WHERE entry_id = ?`;
-  const params = [title, description, id];
+const updateEntryById = async (entry) => {
+  const {entry_id, entry_date, mood, weight, sleep_hours, notes} = entry;
   try {
+    const sql =
+      'UPDATE DiaryEntries SET entry_date=?, mood=?, weight=?, sleep_hours=?, notes=? WHERE entry_id=?';
+    const params = [entry_date, mood, weight, sleep_hours, notes, entry_id];
     const [result] = await promisePool.query(sql, params);
-    console.log('result', result);
-    return { message: 'Entry updated successfully' };
-  } catch (e) {
-    console.error('error', e.message);
-    return { error: e.message };
+    // console.log(result);
+    if (result.affectedRows === 0) {
+      return {error: 404, message: 'entry not found'};
+    }
+    return {message: 'entry data updated', entry_id};
+  } catch (error) {
+    // fix error handling
+    // now duplicate entry error is generic 500 error, should be fixed to 400 ?
+    console.error('updateEntryById', error);
+    return {error: 500, message: 'db error'};
   }
 };
 
+
 const deleteEntryById = async (id) => {
-  const sql = `DELETE FROM DiaryEntries WHERE entry_id = ?`;
   try {
-    const [result] = await promisePool.query(sql, [id]);
-    console.log('result', result);
-    if (result.affectedRows > 0) {
-      return { message: 'Entry deleted successfully' };
-    } else {
-      return { error: 'Entry not found' };
+    const sql = 'DELETE FROM DiaryEntries WHERE entry_id=?';
+    const params = [id];
+    const [result] = await promisePool.query(sql, params);
+    // console.log(result);
+    if (result.affectedRows === 0) {
+      return {error: 404, message: 'entry not found'};
     }
-  } catch (e) {
-    console.error('error', e.message);
-    return { error: e.message };
+    return {message: 'entry deleted', entry_id: id};
+  } catch (error) {
+    console.error('deleteEntryById', error);
+    return {error: 500, message: 'db error'};
   }
 };
+
+
 
 export { listAllEntries, listAllEntriesById, findEntryById, addEntry, updateEntryById, deleteEntryById };
 

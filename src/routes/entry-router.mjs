@@ -10,11 +10,11 @@ import {authenticateToken} from '../middlewares/authentication.mjs';
 
 const entryRouter = express.Router();
 
-entryRouter.route('/').get(authenticateToken, getEntries).post(postEntry);
+entryRouter.route('/').get(authenticateToken, getEntries).post(authenticateToken, postEntry);
 
 entryRouter.route('/:id')
-  .get(getEntryById)
-  .put(putEntry)
-  .delete(deleteEntry);
+  .get(authenticateToken, getEntryById)
+  .put(authenticateToken, putEntry)
+  .delete(authenticateToken, deleteEntry);
 
 export default entryRouter;
