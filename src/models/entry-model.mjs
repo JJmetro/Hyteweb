@@ -2,7 +2,11 @@ import promisePool from '../utils/database.mjs';
 
 const listAllEntries = async () => {
   try {
-    const [rows] = await promisePool.query('SELECT * FROM DiaryEntries');
+    const [rows] = await promisePool.query(`
+      SELECT d.*, u.username
+      FROM DiaryEntries d
+      JOIN Users u ON d.user_id = u.user_id
+    `);
     console.log('rows', rows);
     return rows;
   } catch (e) {
@@ -10,6 +14,8 @@ const listAllEntries = async () => {
     return { error: e.message };
   }
 };
+
+
 
 const listAllEntriesById = async (id) => {
   try {
