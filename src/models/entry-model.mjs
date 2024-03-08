@@ -19,7 +19,12 @@ const listAllEntries = async () => {
 
 const listAllEntriesById = async (id) => {
   try {
-    const sql = 'SELECT * FROM DiaryEntries WHERE user_id=?';
+    const sql = `
+      SELECT d.*, u.username
+      FROM DiaryEntries d
+      JOIN Users u ON d.user_id = u.user_id
+      WHERE d.user_id=?
+    `;
     const params = [id];
     const [rows] = await promisePool.query(sql, params);
     console.log('rows', rows);

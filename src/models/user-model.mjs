@@ -39,7 +39,7 @@ const insertUser = async (user, next) => {
     //console.log(result);
     return {message: 'new user created', user_id: result.insertId};
   } catch (error) {
-    // now duplicate entry error is generic 500 error, should be fixed to 400 ?
+    // now duplicate entry error is generic 500 error
     console.error('insertUser', error);
     // error handler can be used directly from model
     const err = new Error(error);
