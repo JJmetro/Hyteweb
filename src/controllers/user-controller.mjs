@@ -45,11 +45,6 @@ const postUser = async (req, res, next) => {
     error.status = 400;
     error.errors = validationErrors.errors;
     return next (error);
-    return res.status(400)
-    .json({
-      error: 400,
-       message: 'bad request',
-     errors: validationErrors.errors,});
   }
 };
 // only user authenticated by token can update or modify own data
