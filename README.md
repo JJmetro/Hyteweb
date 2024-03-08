@@ -75,7 +75,7 @@ content-type: application/json
 # Get all entries for a logged in user (requires token)
 GET http://localhost:3000/api/auth/entries
 
-# Get entries by id
+# Get entries by id (needs token too)
 GET http://localhost:3000/api/entries/:id
 
 # Post entry(posting new entry takes the user_id from the token, so it requires token to post)
