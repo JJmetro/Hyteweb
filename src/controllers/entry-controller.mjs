@@ -9,16 +9,25 @@ import {
 } from '../models/entry-model.mjs';
 
 const getEntries = async (req, res) => {
-  // return only logged in user's own entries
-  // - get user's id from token (req.user.user_id)
-  const result = await listAllEntriesById(req.user.user_id);
-  if (!result.error) {
+  try {
+    let result;
+    const userLevel = req.user.user_level;
+
+    if (userLevel === 'admin') {
+      // If user is admin, retrieve all entries
+      result = await listAllEntries();
+    } else {
+      // if not, retrieve only logged-in user's own entries
+      result = await listAllEntriesById(req.user.user_id);
+    }
+
     res.json(result);
-  } else {
-    res.status(500);
-    res.json(result);
+  } catch (error) {
+    console.error('Error getting entries:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 const getEntryById = async (req, res) => {
   const entry = await findEntryById(req.params.id);
@@ -100,23 +109,30 @@ const putEntry = async (req, res, next) => {
 
 
 const deleteEntry = async (req, res) => {
-  const entryId = req.params.id;
-
   try {
-    // Get user_id from the token
-    const userIdFromToken = req.user.user_id;
+    const entryId = req.params.id;
 
-    // Checks that the user has rights to delete
-    const entry = await findEntryById(entryId);
+    // Check if the user is an administrator, they can delete anything.
+    if (req.user.user_level === 'admin') {
+      const result = await deleteEntryById(entryId);
+      if (result.error) {
+        return res.status(result.error).json(result);
+      }
+      return res.json(result);
+    }
+
+    // Check if the user is deleting their own entry
+    const userId = req.user.user_id;
+    const entry = await getEntryById(entryId);
+
     if (!entry) {
       return res.status(404).json({ error: 'Entry not found' });
     }
 
-    if (entry.user_id !== userIdFromToken) {
-      return res.status(403).json({ error: 'Unauthorized' });
+    if (entry.user_id !== userId) {
+      return res.status(403).json({ error: 'Unauthorized: You can only delete your own entries' });
     }
 
-    // If the authorized --> delete
     const result = await deleteEntryById(entryId);
     if (result.error) {
       return res.status(result.error).json(result);
@@ -124,11 +140,9 @@ const deleteEntry = async (req, res) => {
     return res.json(result);
   } catch (error) {
     console.error('Error deleting entry:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Database error' });
   }
 };
-
-
 
 
 
