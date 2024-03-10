@@ -8,7 +8,7 @@ const listAllUsers = async () => {
     return rows;
   } catch (error) {
     console.error('listAllUsers', error);
-    return {error: 500, message: 'db error'};
+    return {error: 500, message: 'Database error'};
   }
 };
 
@@ -27,7 +27,7 @@ const selectUserById = async (id) => {
     return rows[0];
   } catch (error) {
     console.error('selectUserById', error);
-    return {error: 500, message: 'db error'};
+    return {error: 500, message: 'Database error'};
   }
 };
 
@@ -39,7 +39,7 @@ const insertUser = async (user, next) => {
     //console.log(result);
     return {message: 'new user created', user_id: result.insertId};
   } catch (error) {
-    // now duplicate entry error is generic 500 error, should be fixed to 400 ?
+    // now duplicate entry error is generic 500 error
     console.error('insertUser', error);
     // error handler can be used directly from model
     const err = new Error(error);
@@ -59,7 +59,7 @@ const updateUserById = async (user) => {
     // fix error handling
     // now duplicate entry error is generic 500 error, should be fixed to 400 ?
     console.error('updateUserById', error);
-    return {error: 500, message: 'db error'};
+    return {error: 500, message: 'Database error'};
   }
 };
 
@@ -70,15 +70,19 @@ const deleteUserById = async (id) => {
     const [result] = await promisePool.query(sql, params);
     console.log(result);
     if (result.affectedRows === 0) {
-      return {error: 404, message: 'user not found'};
+      return {error: 404, message: 'User not found'};
     }
-    return {message: 'user deleted', user_id: id};
+    return {message: 'User deleted', user_id: id};
   } catch (error) {
-    // note that users with other data (FK constraint) cant be deleted directly
+    // Check if user have other data inserted, they need to be deleted first.
+    if (error.code === 'ER_ROW_IS_REFERENCED_2') {
+      return {error: 409, message: 'Cannot delete user: user has diary entries, need to be deleted first.'};
+    }
     console.error('deleteUserById', error);
-    return {error: 500, message: 'db error'};
+    return {error: 500, message: 'Database error'};
   }
 };
+
 
 const selectUserByUsername = async (username) => {
   try {
@@ -94,7 +98,7 @@ const selectUserByUsername = async (username) => {
     return rows[0];
   } catch (error) {
     console.error('selectUserByNameAndPassword', error);
-    return {error: 500, message: 'db error'};
+    return {error: 500, message: 'Database error'};
   }
 };
 
