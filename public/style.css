@@ -1,13 +1,9 @@
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424; */
-
+  background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,13 +13,15 @@
 * {
   box-sizing: border-box;
 }
+
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: #8cb3d9; 
+  text-decoration: none;
 }
+
 a:hover {
-  color: #535bf2;
+  color: #a3c6e4; 
 }
 
 body {
@@ -42,9 +40,8 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
-
 
 button {
   border-radius: 8px;
@@ -54,67 +51,50 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  /* background-color: #1a1a1a; */
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: #8cb3d9; 
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-/* 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
 
 h3 {
-  border-bottom: 1px solid rgb(184, 15, 117);
+  border-bottom: 1px solid #c83d3d; 
   margin-top: 50px;
 }
 
-button.del, button.check, button.update {
+button.del,
+button.check,
+button.update {
   padding: 0.3rem 0.6rem;
   margin: 0;
 }
 
 button.update {
-  background-color: #f2e49448;
+  background-color: #ffcf48; 
 }
 
 button.del {
-  background-color: #f2a29448;
+  background-color: #ffaeae; 
 }
 
 ::backdrop {
-  background-image: linear-gradient(
-    45deg,
-    magenta,
-    rebeccapurple,
-    dodgerblue,
-    green
-  );
+  background-image: linear-gradient(45deg, #ff6a6a, #ffaa3d, #ffcf48, #8cb3d9); /* Soft blue */
   opacity: 0.75;
 }
 
-/* Navigaatiolista tyylittely */
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #ff724f;
+  background-color: #8cb3d9; 
 }
 
 li {
@@ -134,26 +114,23 @@ li a:hover {
 }
 
 li a:hover:not(.active) {
-  background-color: #c83d3d;
+  background-color: #5a7a9d; 
 }
 
 .active {
   background-color: black;
 }
 
-/* Käyttäjä loggaantunut tyylittely */
 .user {
   display: block;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
+
 #name {
   font-weight: bolder;
 }
-
-/* Taulukon tyylittey */
-/* https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
 
 .styled-table {
   border-collapse: collapse;
@@ -165,44 +142,45 @@ li a:hover:not(.active) {
 }
 
 .styled-table thead tr {
-  background-color: #009879;
+  background-color: #8cb3d9; 
   color: #ffffff;
   text-align: left;
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+  padding: 12px 15px;
 }
 
 .styled-table tbody tr {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #5a7a9d; 
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+  background-color: #444; 
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #8cb3d9; 
 }
+
 .styled-table tbody tr.active-row {
   font-weight: bold;
-  color: #009879;
+  color: #8cb3d9; 
 }
 
 .styled-table tbody tr:hover {
-  background-color: #68535358;
+  background-color: #555; 
   cursor: pointer;
 }
+
 .forms {
-  display: flex; 
+  display: flex;
   gap: 30px;
 }
 
-/* Formin tyylittely */
 form {
-  background-color: #009879;
+  background-color: #8cb3d9; 
   color: #ffffff;
   padding: 10px;
   margin-top: 25px;
@@ -213,25 +191,27 @@ form {
   font-family: sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-/* Input kenttien tyylittely */
-input[type=text], input[type=password], input[type=email] {
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
 }
 
-/* Koodiesimerkin tyylittely */
 pre {
-  background-color: aliceblue;
+  background-color: #333; 
 }
 
-#loginResponse, #meResponse {
+#loginResponse,
+#meResponse {
   font-family: 'Courier New', Courier, monospace;
   font-size: smaller;
   display: block;
   width: 100%;
-  word-break:break-all;
+  word-break: break-all;
 }
 
 @media screen and (max-width: 800px) {
