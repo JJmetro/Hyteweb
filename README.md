@@ -2,7 +2,7 @@
 node.js + Express
 # Start
 start dev server: 'npm run dev'
-
+pm2 start src/index.js
 # Link to API documentation
 
 https://hyte-vm-servu.northeurope.cloudapp.azure.com/docs/
