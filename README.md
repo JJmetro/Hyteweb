@@ -132,6 +132,7 @@ At this stage this application is using only 2 of the 4 tables (users, diaryentr
 
 # Known bugs / problems
 After user deletes its account, user must logout to finalize the deletion. 
+#home and #about is unresponsive. (does not reroute to another site)
 
 
 # Contributors
