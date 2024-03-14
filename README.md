@@ -66,7 +66,6 @@ GET http://localhost:3000/api/auth/entries
 
 
 
-
 POST http://localhost:3000/api/entries
 content-type: application/json
 
