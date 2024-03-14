@@ -64,10 +64,7 @@ authRouter
  *    HTTP/1.1 200 OK
  *    {
  *      "message": "Logged in successfully",
- *      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyMSwid
- *                XNlcm5hbWUiOiJ1dXNpMSIsImVtYWlsIjoidXVzaTFAZXhhbXBsZS5jb20
- *                iLCJ1c2VyX2xldmVsX2lkIjoyLCJpYXQiOjE3MDEyNzkzMjJ9.3TbVTcXS
- *                dryTDm_huuXC_U1Lg4rL0SOFyn_WAsC6W0Y"
+ *      "token": "something"
  *      "user": {
  *        "user_id": 21,
  *        "username": "johnd",
