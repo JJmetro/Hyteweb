@@ -10,7 +10,7 @@ start dev server: 'npm run dev'
 
 # Link to the application
 
-
+https://hyte-vm-servu.northeurope.cloudapp.azure.com/index.html
 
 
 
