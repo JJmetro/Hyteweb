@@ -11,12 +11,19 @@ start dev server: 'npm run dev'
 
 
 # Get all users (requires token)
+
 GET http://127.0.0.1:3000/users
+
+![](images/get_users.png)
+
+
 
 
 # Delete user (requires token)
 
 In the UI its been modified that admin can delete any user and regular user can only affect only in own userdata. First user must delete their own entries before user deletion.
+
+![](images/delete_user.png)
 
 DELETE http://127.0.0.1:3000/users/:id
 
@@ -38,6 +45,8 @@ content-type: application/json
 
 user can see the updates in user data in the user list immediately when user refreshes the list.
 
+![](images/update_user.png)
+
 PUT http://127.0.0.1:3000/users/
 content-type: application/json
 
@@ -48,6 +57,12 @@ content-type: application/json
 }
 
 # Login
+
+![](images/login.png)
+
+
+
+
 POST http://localhost:3000/api/users/login
 content-type: application/json
 
@@ -62,13 +77,17 @@ content-type: application/json
 Modified in the UI that user that is logged in can see only their own entries,
 User that is admin can see everyones entries and delete them also.
 
+![](images/get_entries.png)
+
+
+
 GET http://localhost:3000/api/entries/:id
 GET http://localhost:3000/api/auth/entries
 
 
 # Post entry (requires token)
 
-
+![](images/add_entry.png)
 
 POST http://localhost:3000/api/entries
 content-type: application/json
@@ -87,8 +106,10 @@ content-type: application/json
 # Delete entry ( requires token)
 
 user can delete own entries and have to delete them if they want to delete their user from the application.
-
 Admin can do that also.
 
-
 DELETE http://localhost:3000/api/entries/:id
+
+![](images/delete_entries.png)
+
+
