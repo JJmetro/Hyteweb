@@ -112,4 +112,7 @@ DELETE http://localhost:3000/api/entries/:id
 
 ![](images/delete_entries.png)
 
+# Database architecture
+At this stage this application is using only 2 of the 4 tables (users, diaryentries)
 
+![](images/database_diagram.png)
