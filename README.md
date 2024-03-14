@@ -3,7 +3,12 @@ node.js + Express
 # Start
 start dev server: 'npm run dev'
 
+# Link to API documentation
 
+
+
+
+# Link to the application
 
 
 
@@ -127,3 +132,8 @@ At this stage this application is using only 2 of the 4 tables (users, diaryentr
 
 # Known bugs / problems
 After user deletes its account, user must logout to finalize the deletion. 
+
+
+# Contributors
+
+with support and teaching from course teachers: Matti Peltoniemi and Ulla Sederlöf at Metropolia UAS.
