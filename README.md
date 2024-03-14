@@ -21,6 +21,10 @@ In the UI its been modified that admin can delete any user and regular user can 
 DELETE http://127.0.0.1:3000/users/:id
 
 # Create user
+
+![](images/create_user.png)
+
+
 POST http://127.0.0.1:3000/users
 content-type: application/json
 
