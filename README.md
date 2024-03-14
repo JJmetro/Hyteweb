@@ -5,7 +5,7 @@ start dev server: 'npm run dev'
 
 # Link to API documentation
 
-
+https://hyte-vm-servu.northeurope.cloudapp.azure.com/docs/
 
 
 # Link to the application
@@ -17,7 +17,7 @@ https://hyte-vm-servu.northeurope.cloudapp.azure.com/index.html
 
 # Get all users (requires token)
 
-GET http://127.0.0.1:3000/users
+https://hyte-vm-servu.northeurope.cloudapp.azure.com/users
 
 ![](images/get_users.png)
 
@@ -30,14 +30,14 @@ In the UI its been modified that admin can delete any user and regular user can 
 
 ![](images/delete_user.png)
 
-DELETE http://127.0.0.1:3000/users/:id
+https://hyte-vm-servu.northeurope.cloudapp.azure.com/users/:id
 
 # Create user
 
 ![](images/create_user.png)
 
 
-POST http://127.0.0.1:3000/users
+POST https://hyte-vm-servu.northeurope.cloudapp.azure.com/users
 content-type: application/json
 
 {
@@ -52,7 +52,7 @@ user can see the updates in user data in the user list immediately when user ref
 
 ![](images/update_user.png)
 
-PUT http://127.0.0.1:3000/users/
+PUT https://hyte-vm-servu.northeurope.cloudapp.azure.com/users/
 content-type: application/json
 
 {
@@ -68,7 +68,7 @@ content-type: application/json
 
 
 
-POST http://localhost:3000/api/users/login
+POST https://hyte-vm-servu.northeurope.cloudapp.azure.com/api/users/login
 content-type: application/json
 
 {
@@ -91,8 +91,8 @@ User that is admin can see everyones entries and delete them also.
 
 
 
-GET http://localhost:3000/api/entries/:id
-GET http://localhost:3000/api/auth/entries
+GET https://hyte-vm-servu.northeurope.cloudapp.azure.com/api/entries/:id
+GET https://hyte-vm-servu.northeurope.cloudapp.azure.com/api/auth/entries
 
 
 # Post entry (requires token)
@@ -101,7 +101,7 @@ Idecided to get rid off the update entry (PUT), The deletion is so quick and eas
 
 ![](images/add_entry.png)
 
-POST http://localhost:3000/api/entries
+POST https://hyte-vm-servu.northeurope.cloudapp.azure.com/api/entries
 content-type: application/json
 
 {
@@ -120,7 +120,7 @@ content-type: application/json
 user can delete own entries and have to delete them if they want to delete their user from the application.
 Admin can do that also.
 
-DELETE http://localhost:3000/api/entries/:id
+DELETE https://hyte-vm-servu.northeurope.cloudapp.azure.com/api/entries/:id
 
 ![](images/delete_entries.png)
 
