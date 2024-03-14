@@ -71,6 +71,11 @@ content-type: application/json
   "password": "secret"
 }
 
+# Logout
+
+UI has a functioning logout, After user clicks the logout, The localstorage empties itself with the gathered data so relogin is required to get back in.
+
+
 
 # Get all entries(requires token)
 
@@ -86,6 +91,8 @@ GET http://localhost:3000/api/auth/entries
 
 
 # Post entry (requires token)
+
+Idecided to get rid off the update entry (PUT), The deletion is so quick and easy so user can delete old entry and just do it again.
 
 ![](images/add_entry.png)
 
@@ -116,3 +123,7 @@ DELETE http://localhost:3000/api/entries/:id
 At this stage this application is using only 2 of the 4 tables (users, diaryentries)
 
 ![](images/database_diagram.png)
+
+
+# Known bugs / problems
+After user deletes its account, user must logout to finalize the deletion. 
